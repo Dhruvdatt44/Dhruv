@@ -363,6 +363,14 @@ const Projects = () => {
       ],
       tags: ["Long-term Project", "Hard Surface", "Environment"],
       description: "A detailed 3D environment featuring a pirate ship, a passion project I've been refining over a long period. Focused on complex modeling and storytelling through environment design."
+    },
+    {
+      title: "Drone Animation",
+      category: "Modeling / Animation",
+      image: "https://drive.google.com/thumbnail?id=1pAbxIPWb3jhU4AaFf_4Kv33KBdzfIvtf&sz=w1000",
+      videoUrl: "https://drive.google.com/file/d/1pAbxIPWb3jhU4AaFf_4Kv33KBdzfIvtf/preview",
+      tags: ["Drone", "Modeling", "Animation"],
+      description: "A custom-modeled and animated drone project. Focused on mechanical design and flight dynamics in Blender."
     }
   ];
 
