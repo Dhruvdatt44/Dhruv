@@ -456,86 +456,89 @@ const Projects = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-5xl aspect-video glass-panel rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-full max-w-5xl md:aspect-video glass-panel rounded-3xl overflow-hidden shadow-2xl flex flex-col md:block max-h-[90vh] md:max-h-none overflow-y-auto md:overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
-                className="absolute top-4 right-4 z-10 w-10 h-10 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors"
+                className="absolute top-4 right-4 z-50 w-10 h-10 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors"
                 onClick={() => setSelectedProject(null)}
               >
                 <X size={20} />
               </button>
               
-              {selectedProject.videoUrl ? (
-                <iframe
-                  src={selectedProject.videoUrl}
-                  className="w-full h-full border-none"
-                  allow="autoplay; fullscreen"
-                  allowFullScreen
-                />
-              ) : selectedProject.externalUrl ? (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-black p-12 text-center">
-                  <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center text-accent mb-8">
-                    <Instagram size={48} />
+              <div className="w-full aspect-video md:h-full md:aspect-auto">
+                {selectedProject.videoUrl ? (
+                  <iframe
+                    src={selectedProject.videoUrl}
+                    className="w-full h-full border-none"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                ) : selectedProject.externalUrl ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-black p-12 text-center min-h-[300px]">
+                    <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center text-accent mb-8">
+                      <Instagram size={48} />
+                    </div>
+                    <h3 className="text-3xl font-bold mb-4">View on Instagram</h3>
+                    <p className="text-white/60 mb-8 max-w-md">This project is hosted on Instagram. Click the button below to view the full reel.</p>
+                    <a 
+                      href={selectedProject.externalUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-8 py-4 bg-accent text-black font-bold rounded-full hover:bg-white transition-all flex items-center gap-2"
+                    >
+                      OPEN REEL <ExternalLink size={18} />
+                    </a>
                   </div>
-                  <h3 className="text-3xl font-bold mb-4">View on Instagram</h3>
-                  <p className="text-white/60 mb-8 max-w-md">This project is hosted on Instagram. Click the button below to view the full reel.</p>
-                  <a 
-                    href={selectedProject.externalUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 bg-accent text-black font-bold rounded-full hover:bg-white transition-all flex items-center gap-2"
-                  >
-                    OPEN REEL <ExternalLink size={18} />
-                  </a>
-                </div>
-              ) : selectedProject.images ? (
-                <div className="relative w-full h-full flex items-center justify-center bg-black">
+                ) : selectedProject.images ? (
+                  <div className="relative w-full h-full flex items-center justify-center bg-black min-h-[300px]">
+                    <img 
+                      src={selectedProject.images[activeImageIndex]} 
+                      alt={`${selectedProject.title} - ${activeImageIndex + 1}`}
+                      className="max-w-full max-h-full object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {selectedProject.images.length > 1 && (
+                      <>
+                        <button 
+                          onClick={prevImage}
+                          className="absolute left-4 w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors z-20"
+                        >
+                          <ChevronLeft size={24} />
+                        </button>
+                        <button 
+                          onClick={nextImage}
+                          className="absolute right-4 w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors z-20"
+                        >
+                          <ChevronRight size={24} />
+                        </button>
+                        
+                        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                          {selectedProject.images.map((_: any, idx: number) => (
+                            <div 
+                              key={idx}
+                              className={`w-2 h-2 rounded-full transition-all ${idx === activeImageIndex ? 'bg-accent w-6' : 'bg-white/30'}`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ) : (
                   <img 
-                    src={selectedProject.images[activeImageIndex]} 
-                    alt={`${selectedProject.title} - ${activeImageIndex + 1}`}
-                    className="max-w-full max-h-full object-contain"
+                    src={selectedProject.image} 
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover min-h-[300px]"
                     referrerPolicy="no-referrer"
                   />
-                  
-                  {selectedProject.images.length > 1 && (
-                    <>
-                      <button 
-                        onClick={prevImage}
-                        className="absolute left-4 w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors z-20"
-                      >
-                        <ChevronLeft size={24} />
-                      </button>
-                      <button 
-                        onClick={nextImage}
-                        className="absolute right-4 w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors z-20"
-                      >
-                        <ChevronRight size={24} />
-                      </button>
-                      
-                      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                        {selectedProject.images.map((_: any, idx: number) => (
-                          <div 
-                            key={idx}
-                            className={`w-2 h-2 rounded-full transition-all ${idx === activeImageIndex ? 'bg-accent w-6' : 'bg-white/30'}`}
-                          />
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <img 
-                  src={selectedProject.image} 
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              )}
+                )}
+              </div>
               
-              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
-                <h3 className="text-2xl font-bold text-accent">{selectedProject.title}</h3>
-                <p className="text-white/60 text-sm mt-2">{selectedProject.description}</p>
+              <div className="relative md:absolute md:bottom-0 md:left-0 w-full p-6 bg-black/60 md:bg-gradient-to-t md:from-black/80 md:to-transparent z-10">
+                <h3 className="text-xl md:text-2xl font-bold text-accent">{selectedProject.title}</h3>
+                <p className="text-white/60 text-xs md:text-sm mt-2">{selectedProject.description}</p>
               </div>
             </motion.div>
           </motion.div>
