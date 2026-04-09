@@ -12,6 +12,7 @@ import {
   Instagram, 
   Linkedin,
   Phone,
+  Youtube,
   ExternalLink,
   ChevronDown,
   ChevronLeft,
@@ -218,13 +219,13 @@ const About = () => {
 
           <div className="space-y-6 text-white/70 text-lg leading-relaxed font-light">
             <p>
-              I am a SY B.Tech Electronics student at <span className="text-white font-medium">Walchand College of Engineering, Sangli</span>. My journey into the digital realm began with a fascination for how light interacts with geometry.
+              Currently pursuing a <span className="text-white font-medium">B.Tech in Electronics Engineering</span> at Walchand College of Engineering, Sangli, I am a dedicated 3D Artist driven by the intricate interplay between light, shadow, and geometry.
             </p>
             <p>
-              Specializing in <span className="text-accent">Blender 3D</span>, I transform abstract concepts into cinematic realities. The projects showcased here are just a <span className="text-white font-medium">small part of the extensive work and techniques</span> I've mastered in Blender, from complex modeling to advanced node-based shading.
+              Specializing in <span className="text-accent">Blender 3D</span>, I bridge the gap between technical precision and cinematic storytelling. My work focuses on transforming abstract concepts into high-fidelity realities, utilizing advanced techniques in complex modeling, procedural shading, and dynamic lighting.
             </p>
             <p>
-              I am actively seeking <span className="text-accent font-medium">internship and professional work opportunities</span> where I can contribute my 3D skills to real-world VFX, CGI, or animation projects.
+              I am actively seeking <span className="text-accent font-medium">internship and professional opportunities</span> in VFX, CGI, and animation, where I can apply my technical expertise to drive impactful visual narratives.
             </p>
           </div>
 
@@ -304,6 +305,14 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
   const projects = [
+    {
+      title: "NFS Most Wanted Animation",
+      category: "Animation / Automotive",
+      image: "https://drive.google.com/thumbnail?id=1QGbGmNTPYDhUpK_Z6TZlumO0A5rqK6y6&sz=w1000",
+      videoUrl: "https://drive.google.com/file/d/1QGbGmNTPYDhUpK_Z6TZlumO0A5rqK6y6/preview",
+      tags: ["NFS", "Most Wanted", "Animation"],
+      description: "This video was made to introduce my insta and youtube channel."
+    },
     {
       title: "Trailer for ELESA Club",
       category: "Trailer / Animation",
@@ -470,7 +479,7 @@ const Projects = () => {
                 {selectedProject.videoUrl ? (
                   <iframe
                     src={selectedProject.videoUrl}
-                    className="w-full h-full border-none"
+                    className={`w-full h-full border-none ${selectedProject.rotate ? 'rotate-90 scale-[1.78] md:scale-100' : ''}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                     allowFullScreen
                     loading="lazy"
@@ -570,9 +579,15 @@ const Contact = () => {
     },
     {
       label: "Instagram",
-      value: "@dkdhruv44",
+      value: "@visualvizards__studio",
       icon: Instagram,
-      link: "https://www.instagram.com/dkdhruv44?igsh=MTNqZW43cWV6dTgwNQ=="
+      link: "https://www.instagram.com/visualvizards__studio?igsh=MWJmaTg5eWhtdmUwbg=="
+    },
+    {
+      label: "YouTube",
+      value: "@VisualVizards_studio",
+      icon: Youtube,
+      link: "https://www.youtube.com/@VisualVizards_studio"
     }
   ];
 
@@ -584,7 +599,7 @@ const Contact = () => {
           <h2 className="text-4xl font-bold">GET IN TOUCH</h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {contactInfo.map((info, i) => (
             <motion.a
               key={info.label}
@@ -627,7 +642,8 @@ const Footer = () => {
         </p>
         <div className="flex gap-6">
           <a href="https://linkedin.com/in/dhruvdatt-khanke-97812832a" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-accent transition-colors"><Linkedin size={18} /></a>
-          <a href="https://www.instagram.com/dkdhruv44?igsh=MTNqZW43cWV6dTgwNQ==" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-accent transition-colors"><Instagram size={18} /></a>
+          <a href="https://www.instagram.com/visualvizards__studio?igsh=MWJmaTg5eWhtdmUwbg==" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-accent transition-colors"><Instagram size={18} /></a>
+          <a href="https://www.youtube.com/@VisualVizards_studio" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-accent transition-colors"><Youtube size={18} /></a>
         </div>
       </div>
     </footer>
